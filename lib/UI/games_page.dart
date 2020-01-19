@@ -33,6 +33,7 @@ class _MyappState extends State<Myapp> {
         if(_gameModel.next != null){
           url = _gameModel.next;
           bloc.fetchallgames(url);
+          _controller.jumpTo(_controller.offset - (260 * _gameModel.results.length));
         }
       });
     }
@@ -43,6 +44,7 @@ class _MyappState extends State<Myapp> {
         if(_gameModel.previous != null){
           url = _gameModel.previous;
           bloc.fetchallgames(url);
+          _controller.jumpTo(_controller.offset + (260 * _gameModel.results.length));
         }
       });
     }
