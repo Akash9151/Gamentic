@@ -114,8 +114,9 @@ class _MyappState extends State<Myapp> {
                           Center(
                             child: FadeInImage.assetNetwork(
                               placeholder: 'assets/transparent.png',
+                              height: 250,
                               image: _gameModel.results[index].backgroundImage,
-                              fit: BoxFit.cover,
+                              fit: BoxFit.fitWidth,
                             ),
                           ),
                         ],
