@@ -219,47 +219,45 @@ class _GameDetailPageState extends State<GameDetailPage> {
               SizedBox(
                 height: 10.0,
               ),
-              SingleChildScrollView(
-                child: Container(
-                  height: 200.0,
-                  child: ListView.builder(
-                    scrollDirection: Axis.vertical,
-                    itemCount: _gameDetail.developers.length,
-                    itemBuilder: (context, int index) {
-                      return GestureDetector(
-                        onTap: () {
-                          Navigator.push(
-                              context,
-                              new MaterialPageRoute(
-                                  builder: (context) => PlatformDetailPage(
-                                      _gameDetail.platforms[index].platform.id
-                                          .toString(),
-                                      _gameDetail
-                                          .platforms[index].platform.name)));
-                        },
-                        child: MyCard(
-                          Center(
-                            child: Padding(
-                                padding: const EdgeInsets.all(10.0),
-                                child: ListTile(
-                                  leading: CircleAvatar(
-                                    radius: 30.0,
-                                    backgroundImage: NetworkImage(
-                                        "${_gameDetail.developers[index].imageBackground}"),
-                                    backgroundColor: Colors.transparent,
-                                  ),
-                                  title: Text(
-                                    _gameDetail.developers[index].name,
-                                    style: TextStyle(
-                                        color: Colors.white, fontSize: 20.0),
-                                  ),
-                                )
+              Container(
+                height: 100.0 * _gameDetail.developers.length,
+                child: ListView.builder(
+                  scrollDirection: Axis.vertical,
+                  itemCount: _gameDetail.developers.length,
+                  itemBuilder: (context, int index) {
+                    return GestureDetector(
+                      onTap: () {
+                        Navigator.push(
+                            context,
+                            new MaterialPageRoute(
+                                builder: (context) => PlatformDetailPage(
+                                    _gameDetail.platforms[index].platform.id
+                                        .toString(),
+                                    _gameDetail
+                                        .platforms[index].platform.name)));
+                      },
+                      child: MyCard(
+                        Center(
+                          child: Padding(
+                              padding: const EdgeInsets.all(10.0),
+                              child: ListTile(
+                                leading: CircleAvatar(
+                                  radius: 30.0,
+                                  backgroundImage: NetworkImage(
+                                      "${_gameDetail.developers[index].imageBackground}"),
+                                  backgroundColor: Colors.transparent,
                                 ),
-                          ),
+                                title: Text(
+                                  _gameDetail.developers[index].name,
+                                  style: TextStyle(
+                                      color: Colors.white, fontSize: 20.0),
+                                ),
+                              )
+                              ),
                         ),
-                      );
-                    },
-                  ),
+                      ),
+                    );
+                  },
                 ),
               ),
             ],
