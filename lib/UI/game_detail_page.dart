@@ -5,6 +5,7 @@ import 'package:gamentic/blocs/game_screenshots_bloc.dart';
 import 'package:gamentic/models/game_detail_model.dart';
 import 'package:gamentic/models/game_screenshots_model.dart';
 import 'platform_detail_page.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class GameDetailPage extends StatefulWidget {
   final int id;
@@ -252,8 +253,7 @@ class _GameDetailPageState extends State<GameDetailPage> {
                                   style: TextStyle(
                                       color: Colors.white, fontSize: 20.0),
                                 ),
-                              )
-                              ),
+                              )),
                         ),
                       ),
                     );
@@ -263,7 +263,78 @@ class _GameDetailPageState extends State<GameDetailPage> {
             ],
           ),
         )),
+        MyCard(Container(
+          child: Column(
+            children: <Widget>[
+              SizedBox(
+                height: 10.0,
+              ),
+              Text(
+                "Stores",
+                textAlign: TextAlign.start,
+                style: TextStyle(color: Colors.white, fontSize: 20.0),
+              ),
+              SizedBox(
+                height: 10.0,
+              ),
+              SingleChildScrollView(
+                child: Container(
+                  height: 270.0,
+                  child: ListView.builder(
+                    scrollDirection: Axis.horizontal,
+                    itemCount: _gameDetail.stores.length,
+                    itemBuilder: (context, int index) {
+                      return GestureDetector(
+                        onTap: () {
+                          _launchURL(_gameDetail.stores[index].url);
+                        },
+                        child: MyCard(
+                          Column(
+                            children: <Widget>[
+                              Stack(
+                                children: <Widget>[
+                                  
+                                  Center(
+                                    child: FadeInImage.assetNetwork(
+                                      placeholder: 'assets/transparent.png',
+                                      height: 200.0,
+                                      image: _gameDetail
+                                          .stores[index].store.imageBackground,
+                                      fit: BoxFit.cover,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              Center(
+                                child: Padding(
+                                  padding: const EdgeInsets.all(10.0),
+                                  child: Text(
+                                    _gameDetail.stores[index].store.name,
+                                    style: TextStyle(
+                                        color: Colors.white, fontSize: 20.0),
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      );
+                    },
+                  ),
+                ),
+              ),
+            ],
+          ),
+        )),
       ],
     );
+  }
+
+  _launchURL(String url) async {
+    if (await canLaunch(url)) {
+      await launch(url);
+    } else {
+      throw 'Could not launch $url';
+    }
   }
 }
