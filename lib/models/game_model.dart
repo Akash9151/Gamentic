@@ -349,7 +349,7 @@ class Platform {
   String slug;
   Null image;
   Null yearEnd;
-  Null yearStart;
+  int yearStart;
   int gamesCount;
   String imageBackground;
 
