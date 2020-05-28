@@ -1,4 +1,3 @@
-import 'package:gamentic/models/game_model.dart';
 
 class GameDetail {
   int id;

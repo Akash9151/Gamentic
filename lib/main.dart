@@ -1,13 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:gamentic/UI/games_page.dart';
-import 'package:gamentic/UI/platform_page.dart';
-import 'package:gamentic/application.dart';
+import 'package:gamentic/UI/splash_screen.dart';
 
 
 void main() => runApp(
   new MaterialApp(
     debugShowCheckedModeBanner: false,
-    home: Application(),
+    home: SplashScreen(),
   )
 );
 
