@@ -5,20 +5,25 @@ import 'package:gamentic/blocs/games_bloc.dart';
 import 'package:gamentic/models/game_model.dart';
 
 class Myapp extends StatefulWidget {
+
+  final VoidCallback load;
+  final Stream bloc;
+
+  Myapp({@required this.load, @required this.bloc});
+
   @override
   _MyappState createState() => _MyappState();
 }
 
 class _MyappState extends State<Myapp> {
-  String url = "https://api.rawg.io/api/games";
+  String url = "";
 
-  ScrollController _controller;
 
   List<Results> _list;
 
   @override
   void initState() {
-    bloc.fetchallgames(url);
+    widget.load();
     _list = List();
     super.initState();
   }
@@ -50,7 +55,7 @@ class _MyappState extends State<Myapp> {
         ],
       ),
       body: StreamBuilder<GameModel>(
-        stream: bloc.getGames,
+        stream: widget.bloc,
         builder: (context, AsyncSnapshot<GameModel> asyncSnapshot) {
           if (asyncSnapshot.hasData) {
             _list.addAll(asyncSnapshot.data.results);

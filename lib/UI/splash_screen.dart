@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:gamentic/UI/games_page.dart';
+import 'package:gamentic/blocs/games_bloc.dart';
 
 class SplashScreen extends StatefulWidget {
   @override
@@ -9,6 +10,10 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen> {
+
+  String url = "https://api.rawg.io/api/games";
+
+
   startTime() async {
     var _duration = new Duration(seconds: 2);
     return new Timer(_duration, navigationPage);
@@ -16,7 +21,12 @@ class _SplashScreenState extends State<SplashScreen> {
 
   void navigationPage() {
     Navigator.pushReplacement(
-        context, MaterialPageRoute(builder: (context) => Myapp()));
+        context, MaterialPageRoute(builder: (context) => Myapp(
+          load: (){
+            bloc.fetchallgames(url);
+          },
+          bloc: bloc.getGames,
+        )));
   }
 
   @override
